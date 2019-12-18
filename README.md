@@ -1,4 +1,4 @@
-# yazilimmimarisivetasarimi
+# yazilim mimarisi ve tasarimi
 ## Fabrika Tasarım Deseni  
 
 Factory Method (Fabrika metod) tasarım deseni creational grubununa ait, aynı arayüzü kullanan nesnelerin üretiminden sorumlu tasarım desenidir. 
