@@ -5,8 +5,8 @@ Factory Method (Fabrika metod) tasarım deseni creational grubununa ait, aynı a
 Yazdığınız program da birbirine benzeyen birden fazla sınıf olabilir. Bu tür sınıfları oluştururken her seferinde new operatörünü kullanmayın ya da o sınıflardan sanki birbirinden bağımsızmış gibi kod yazmayalım diye böyle bir örüntü tasarlanmış.
 
 Factory Method tasarım deseni aynı abstract sınıfı veya arayüzü uygulayan sınıfların üretiminden sorumludur. Kullanımı 2 şekilde olabilir. Birinci kullanım şeklinde nesne üretiminden sorumlu bir class olur ve bu sınıftaki metoda gönderilen parametre ile üretilecek sınıfın türü belirlenir. İkinci kullanım şeklinde ise her nesne üretimi için aynı arayüzü kullanan sınıflar oluşturulur ve hangi sınıftan nesne istenirse belirli bir sınıfı verir. Abstract method tasarım deseni abstract factory tasarım deseni ile çok benzer bir yapıdadır.   
-2 tarz uml vardır:
-1.Kullanım şekli:  
+2 tarz uml vardır:  
+1.Kullanım şekli:    
 ![Imega of Class](https://github.com/beytullah01/yaz-l-m-mimarisi-ve-tasar-m-/blob/master/FactoryMethod1UML.jpg)  
 
 2.Kullanım Şekli  
