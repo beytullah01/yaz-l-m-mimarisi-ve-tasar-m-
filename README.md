@@ -75,7 +75,7 @@ static void Main(string[] args)
     rapor.Olustur();
 }
 ```
-##Adaptör Tasarım Deseni  
+##  Adaptör Tasarım Deseni  
 
 Gerçek hayatta karşılığı olan bir tasarım örüntüsüdür. Farklı girişleri(interface) ler uyum sağlayabilmek için Adaptörler kullanılır. Örneğin bir tarafta Integer olan veri diğer tarafta Hexadecimal formatta isteniyorsa Adapter bu dönüşümü sizin için yaparak iki farklı cihazın birlikte çalışmasını sağlar.  
 Gerçek hayattaki adaptörün benzeri yazılımda geçerlidir. Farklı interface uyum sağlamak için sınıfınızı saracak adaptör sınıflara ihtiyaç duyarsınız.
