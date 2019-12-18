@@ -78,7 +78,7 @@ static void Main(string[] args)
 ##  Adaptör Tasarım Deseni  
 
 Gerçek hayatta karşılığı olan bir tasarım örüntüsüdür. Farklı girişleri(interface) ler uyum sağlayabilmek için Adaptörler kullanılır. Örneğin bir tarafta Integer olan veri diğer tarafta Hexadecimal formatta isteniyorsa Adapter bu dönüşümü sizin için yaparak iki farklı cihazın birlikte çalışmasını sağlar.  
-Gerçek hayattaki adaptörün benzeri yazılımda geçerlidir. Farklı interface uyum sağlamak için sınıfınızı saracak adaptör sınıflara ihtiyaç duyarsınız.
+Gerçek hayattaki adaptörün benzeri yazılımda geçerlidir. Farklı interface uyum sağlamak için sınıfınızı saracak adaptör sınıflara ihtiyaç duyarsınız.  
 ![Imega of Class](https://github.com/beytullah01/yaz-l-m-mimarisi-ve-tasar-m-/blob/master/adapt%C3%B6r_metot.jpg)  
 Bu desen adapte edilecek sınıf, adapte edilecek sınıfın nesnesini yeni bir interface ile içinde sarmalayarak (ya da adaptör sınıfı adapte edilecek sınıftan da türeyebilir) kullanacak olan adaptörden oluşur.  
 
