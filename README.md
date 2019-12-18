@@ -75,3 +75,186 @@ static void Main(string[] args)
     rapor.Olustur();
 }
 ```
+##Adaptör Tasarım Deseni  
+
+Gerçek hayatta karşılığı olan bir tasarım örüntüsüdür. Farklı girişleri(interface) ler uyum sağlayabilmek için Adaptörler kullanılır. Örneğin bir tarafta Integer olan veri diğer tarafta Hexadecimal formatta isteniyorsa Adapter bu dönüşümü sizin için yaparak iki farklı cihazın birlikte çalışmasını sağlar.  
+Gerçek hayattaki adaptörün benzeri yazılımda geçerlidir. Farklı interface uyum sağlamak için sınıfınızı saracak adaptör sınıflara ihtiyaç duyarsınız.
+![Imega of Class](https://github.com/beytullah01/yaz-l-m-mimarisi-ve-tasar-m-/blob/master/adapt%C3%B6r_metot.jpg)  
+Bu desen adapte edilecek sınıf, adapte edilecek sınıfın nesnesini yeni bir interface ile içinde sarmalayarak (ya da adaptör sınıfı adapte edilecek sınıftan da türeyebilir) kullanacak olan adaptörden oluşur.  
+
+Sisteme Adapte Edilecek Sınıf (Adaptee sınıfı)  
+public class Adaptee
+```c#
+	{
+
+	    public double IskontaliTutariHesapla(double fiyat, double adet)
+
+	    {
+
+	        Console.WriteLine("\nLütfen iskonto miktarını giriniz.\n");           
+
+	        double iskonto = Convert.ToDouble(Console.ReadLine());
+
+	        return fiyat * adet * (1 - iskonto);
+
+	    }
+
+	}
+ ```
+ Adaptör sınıfı içinde (yeni sisteme adapte edilecek sınıf) kullanıcıdan alınan fiyat, miktar ve iskonto bilgileri ile toplam tutarın hesaplanması yapılmaktadır.
+
+
+ITutarHesaplayici
+
+```c#
+	public interface ITutarHesaplayici
+
+	   {
+
+	       double Hesapla(double fiyat, double adet);
+
+	   }
+  ```
+  
+  Adaptör nesnemizin implement edeceği ITutarHeaplayici interface'i data tipi double olan ve 2 tane parametre alan bir fonksiyon imzası taşımaktadır.
+
+public class Adapter:ITutarHesaplayici
+  ```c#
+	{
+        private Adaptee adaptee;
+	 
+
+	    public Adapter()
+
+	    {
+
+	        adaptee = new Adaptee();
+
+	    }         
+
+	 
+
+	    public double Hesapla(double fiyat, double adet)
+
+	    {
+
+	        return adaptee.IskontaliTutariHesapla(fiyat, adet);
+
+	    }
+
+	}
+ ```
+            
+
+Adaptör sınıfında private Adaptee tipinde değişken bulunmaktadır. Adapter sınıfının içinde ITutarHesaplayici interfacinin Hesapla fonksiyonunu implement ederken, bu fonksiyon içinde Adaptee tipindeki değişkenin IskontaliTutariHesapla fonksiyonunu çağırarak adapte edeceğimiz sınıfın örneğini kullanmış bulunmaktayız.
+
+Client Sınıfı
+```c#
+	public class Client
+
+	{
+
+	    public void OdenecekMeblayiHesapla(ITutarHesaplayici hesaplayici)
+
+	    {
+
+	        Console.WriteLine("\nLütfen fiyatı giriniz.\n");
+
+	        double fiyat = Convert.ToDouble(Console.ReadLine());
+
+	        Console.WriteLine("\nLütfen miktarı giriniz.\n");
+
+	        double miktar = Convert.ToDouble(Console.ReadLine());
+
+	        Console.WriteLine("\nTutar = " + hesaplayici.Hesapla(fiyat, miktar));
+
+	        Console.WriteLine();
+
+	    }
+
+	}
+```
+Bu sınıfın içindeki OdenecekMeblayiHesapla fonksiyonu kullanıcıdan fiyat ve miktar bilgilerini aldıktan sonra ITutarHesaplayici interfacini implement etmiş sınıfların nesnelerini parametre olarak alarak hesaplama işlemini yapmaktadır.
+
+Program.cs
+```c#
+
+	class Program
+
+	{
+
+	    static void Main(string[] args)
+
+	    {
+
+	        Adapter adapter = new Adapter();
+
+	        string tercih = null;
+
+	        Client client = new Client();
+
+	        try
+
+	        {
+
+	            while (true)
+
+	            {
+
+	                Console.WriteLine("Malzemenin tutarını hesaplamak için 1 e," +
+
+	                    "\niskontolu tutarını hesaplamak için 2 ye," +
+
+	                    "\nuygulamadan çıkmak için 3'e basınız.\n");
+
+	                tercih = Console.ReadLine();
+
+	                int secenek = Convert.ToInt32(tercih);
+
+	                Console.WriteLine();
+
+	                if (secenek == 1)
+
+	                {
+
+	                    client.OdenecekMeblayiHesapla(new MalzemeTipineGoreToplamTutariniHesapla());
+	                }
+                    
+
+	                else if (secenek == 2)
+
+	                {
+
+	                    client.OdenecekMeblayiHesapla(new Adapter());
+
+	                }
+
+	                else
+
+	                {
+
+	                    return;
+
+	                }
+
+	            }
+
+	        }
+
+	        catch
+
+	        {
+
+	            Console.WriteLine("Hata ile karşılaşıldı. Uygulama sonlanacaktır.");
+
+	            Thread.Sleep(1500);               
+
+	        }
+
+	    }
+
+
+	}
+ ```
+
+Main fonksiyonu içinde kullanıcıdan hangi tür hesaplama işlemini yapacağı bilgisini aldıktan sonra, client nesnesi oluşturarak içine ilgili nesneleri parametre olarak geçiyoruz. Adapter ve MalzemeTipineGoreToplamTutariniHesapla nesnelerini tutar hesaplamak için kullanıyoruz. MalzemeTipineGoreToplamTutariniHesapla nesnesini kendimiz yazdığımız halde Adapter nesnesi sayesinde önceden yazılmış olan Adaptee nesnesini sisteme adapte ederek kullanıyoruz.
